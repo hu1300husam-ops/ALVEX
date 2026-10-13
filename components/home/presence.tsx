@@ -4,7 +4,7 @@ import { Coordinates, Plate } from "@/components/brand/plate";
 const points = [
   {
     title: "Local market knowledge",
-    text: "Knowing where product categories are made in China and which suppliers are active in them, so the search starts in the right place.",
+    text: "Knowing where each product category is made across China and which suppliers are active in it, so the search starts in the right place.",
   },
   {
     title: "On-site commercial support",
@@ -42,8 +42,7 @@ export function Presence() {
                   China
                 </p>
                 <p className="max-w-[24rem] text-[15px] leading-[1.6] text-white/80">
-                  Based in China. Our base for sourcing, supplier communication and on-site commercial
-                  support.
+                  Sourcing, supplier verification and trade support across China, coordinated in Chinese and English.
                 </p>
               </div>
             </div>
