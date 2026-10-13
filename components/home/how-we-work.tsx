@@ -1,105 +1,51 @@
-"use client";
-
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
 import { howWeWork } from "@/content/site";
-import { Reveal } from "@/components/ui/reveal";
 
+/**
+ * Process: six connected stages on one continuous spine. Each node sits on the
+ * spine and each stage is a full row, so the sequence reads top to bottom on
+ * every screen width. The first and last nodes are emphasised to show the
+ * start and the handover.
+ */
 export function HowWeWork() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const stageRefs = useRef<(HTMLLIElement | null)[]>([]);
-  const [active, setActive] = useState(0);
-  const reduce = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start 0.6", "end 0.6"] });
-  const progress = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(Number(entry.target.getAttribute("data-index")));
-        });
-      },
-      { rootMargin: "-45% 0px -45% 0px" },
-    );
-    stageRefs.current.forEach((el) => el && observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section
-      id="how-we-work"
-      ref={sectionRef}
-      aria-labelledby="how-title"
-      className="border-t border-line bg-porcelain"
-    >
-      <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-12 px-5 py-24 sm:px-8 md:py-32 lg:grid-cols-12 lg:gap-x-6 lg:px-12">
-        <div className="lg:col-span-5 lg:sticky lg:top-32 lg:h-fit">
-          <Reveal>
-            <p className="mb-6 text-[12px] font-semibold uppercase tracking-[0.2em] text-steel-deep">
-              03 — How we work
-            </p>
-            <h2
-              id="how-title"
-              className="font-display text-display-m font-bold leading-[1.02] tracking-[-0.03em] text-navy"
-            >
-              From the first conversation to the next opportunity.
-            </h2>
-            <p className="mt-6 max-w-[30rem] text-[17px] leading-[1.65] text-ink">
-              Six stages, scoped to the service you need. A sourcing brief may use all six; a single factory visit
-              may use two.
-            </p>
-          </Reveal>
-
-          {/* Stage indicator: a rail that fills with scroll and a live readout of the current stage. */}
-          <div className="mt-12 hidden items-center gap-5 lg:flex" aria-hidden>
-            <div className="relative h-px flex-1 bg-line">
-              <motion.div
-                className="absolute inset-y-0 left-0 bg-navy"
-                style={{ width: reduce ? "100%" : progress }}
-              />
-            </div>
-            <span className="text-[13px] tabular-nums text-steel-deep">
-              0{active + 1} / 0{howWeWork.length}
-            </span>
-          </div>
+    <section id="how-we-work" aria-labelledby="how-title" className="bg-porcelain text-navy">
+      <div className="mx-auto grid max-w-[1320px] gap-16 px-5 py-24 sm:px-8 md:py-32 lg:grid-cols-12 lg:gap-10 lg:px-12">
+        <div className="lg:col-span-4">
+          <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-steel-deep">03 — How we work</p>
+          <h2
+            id="how-title"
+            className="mt-8 font-display text-[clamp(36px,4.6vw,64px)] font-bold leading-[1.04] tracking-[-0.03em] text-balance"
+          >
+            From the first conversation to the next opportunity.
+          </h2>
+          <p className="mt-8 max-w-[24rem] text-[17px] leading-[1.65] text-steel-deep">
+            Six stages, scoped to the service you need. A sourcing brief may use all six; a single factory visit may
+            use two.
+          </p>
         </div>
 
-        <ol className="lg:col-span-6 lg:col-start-7">
+        <ol className="relative lg:col-span-7 lg:col-start-6">
+          {/* The spine: one continuous line that every stage hangs from. */}
+          <span aria-hidden className="absolute bottom-6 left-[15px] top-6 w-px bg-navy/20 md:left-[19px]" />
           {howWeWork.map((stage, i) => {
-            const isActive = i === active;
+            const first = i === 0;
+            const last = i === howWeWork.length - 1;
             return (
-              <li
-                key={stage.title}
-                ref={(el) => {
-                  stageRefs.current[i] = el;
-                }}
-                data-index={i}
-                className="grid grid-cols-[3.5rem_1fr] gap-x-4 border-t border-line py-10 last:border-b sm:grid-cols-[5rem_1fr] md:py-14"
-              >
+              <li key={stage.step} className="relative grid grid-cols-[32px_1fr] gap-6 pb-14 last:pb-0 md:grid-cols-[40px_1fr] md:gap-10">
                 <span
-                  className={`font-display text-[15px] font-semibold tabular-nums transition-colors duration-700 ${
-                    isActive ? "text-navy" : "text-steel-deep"
+                  aria-hidden
+                  className={`relative z-10 mt-1 flex h-8 w-8 items-center justify-center rounded-full border md:h-10 md:w-10 ${
+                    first || last ? "border-steel-deep bg-navy" : "border-navy/35 bg-porcelain"
                   }`}
                 >
-                  {stage.step}
+                  <span className={`h-2 w-2 rounded-full ${first || last ? "bg-[#8FA8FF]" : "bg-navy/50"}`} />
                 </span>
                 <div>
-                  <h3
-                    className={`font-display text-[32px] font-semibold leading-none tracking-[-0.02em] transition-colors duration-700 sm:text-[44px] ${
-                      isActive ? "text-navy" : "text-steel-deep"
-                    }`}
-                  >
+                  <p className="font-display text-[13px] font-semibold tabular-nums text-steel-deep">{stage.step}</p>
+                  <h3 className="mt-2 font-display text-[28px] font-bold leading-tight tracking-[-0.02em] sm:text-[34px]">
                     {stage.title}
                   </h3>
-                  <p
-                    className={`mt-5 max-w-[30rem] text-[17px] leading-[1.65] transition-opacity duration-700 ${
-                      isActive ? "text-ink opacity-100" : "text-steel-deep"
-                    }`}
-                  >
-                    {stage.text}
-                  </p>
+                  <p className="mt-3 max-w-[32rem] text-[16px] leading-[1.65] text-steel-deep">{stage.text}</p>
                 </div>
               </li>
             );

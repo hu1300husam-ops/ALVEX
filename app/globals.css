@@ -165,3 +165,18 @@
     animation-delay: var(--d, 0s);
   }
 }
+
+/* Service explorer: panel content fades in when the selection changes, and the
+   route line draws once. Both are CSS-only and disabled for reduced motion. */
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes route-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .panel-in { animation: panel-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .route-draw { stroke-dasharray: 1; animation: route-draw 1.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+}
