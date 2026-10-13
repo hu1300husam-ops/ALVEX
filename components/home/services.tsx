@@ -41,8 +41,8 @@ export function Services() {
                 <li key={service.slug} className="border-t border-white/12 last:border-b">
                   <button
                     type="button"
-                    aria-pressed={selected}
-                    aria-controls="service-panel"
+                    aria-expanded={selected}
+                    aria-controls={`service-detail-${i}`}
                     onClick={() => setActive(i)}
                     onMouseEnter={() => window.matchMedia("(hover: hover)").matches && setActive(i)}
                     className="group flex w-full min-h-16 items-center justify-between gap-6 py-5 text-left"
@@ -67,15 +67,29 @@ export function Services() {
                       →
                     </span>
                   </button>
+                  {/* Mobile and tablet: inline accordion panel, directly under the selected item. */}
+                  <div id={`service-detail-${i}`} hidden={!selected} className="pb-8 lg:hidden">
+                    <p className="text-[16px] leading-[1.6] text-white/85">{service.summary}</p>
+                    <ul className="mt-5 space-y-2.5 text-[15px] text-white/80">
+                      {service.scope.map((item) => (
+                        <li key={item} className="flex gap-3">
+                          <span aria-hidden className="mt-2.5 h-px w-4 shrink-0 bg-accent-soft" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    <a href="#contact" className="link-indicator mt-6 inline-block min-h-12 py-3 text-[15px] font-semibold text-porcelain">
+                      Discuss {service.title.toLowerCase()}
+                    </a>
+                  </div>
                 </li>
               );
             })}
           </ol>
 
           <div
-            id="service-panel"
             aria-live="polite"
-            className="lg:col-span-5 lg:col-start-8 lg:sticky lg:top-32 lg:self-start"
+            className="hidden lg:col-span-5 lg:col-start-8 lg:sticky lg:top-32 lg:block lg:self-start"
           >
             <AnimatePresence mode="wait">
               <motion.div

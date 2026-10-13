@@ -1,124 +1,174 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { navigation } from "@/content/site";
 import { Logo } from "@/components/brand/logo";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
+/**
+ * Site header and mobile navigation.
+ *
+ * Root cause of the earlier "menu does not appear" defect: the overlay was
+ * rendered inside the header. While the menu was open the header carried
+ * `backdrop-filter`, which makes it the containing block for fixed descendants.
+ * The overlay (`fixed inset-0 top-16`) was therefore sized to the 64px header
+ * bar and collapsed to 0px height. The overlay now lives outside the header,
+ * in the viewport's containing block.
+ *
+ * Behaviour: disclosure pattern (aria-expanded / aria-controls), Escape closes,
+ * focus moves into the menu on open and returns to the toggle on close, page
+ * content is made inert and scroll-locked while open, and any link closes it.
+ */
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const wasOpen = useRef(false);
   const reduce = useReducedMotion();
 
+  // Header surface: transparent over the hero, solid once the page moves.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Scroll lock, Escape, inert page content, and leave the menu on desktop widths.
   useEffect(() => {
     if (!open) return;
-    const previous = document.body.style.overflow;
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    window.addEventListener("keydown", onKey);
+    const inertTargets = [document.getElementById("main"), document.getElementById("site-footer")].filter(
+      (el): el is HTMLElement => el !== null,
+    );
+    inertTargets.forEach((el) => el.setAttribute("inert", ""));
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    const desktop = window.matchMedia("(min-width: 1280px)");
+    const onDesktop = () => desktop.matches && setOpen(false);
+    document.addEventListener("keydown", onKey);
+    desktop.addEventListener("change", onDesktop);
     return () => {
-      document.body.style.overflow = previous;
-      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = previousOverflow;
+      inertTargets.forEach((el) => el.removeAttribute("inert"));
+      document.removeEventListener("keydown", onKey);
+      desktop.removeEventListener("change", onDesktop);
     };
   }, [open]);
 
+  // Focus management: into the menu on open, back to the toggle on close.
+  useEffect(() => {
+    if (open) {
+      const first = menuRef.current?.querySelector<HTMLElement>("a");
+      requestAnimationFrame(() => first?.focus({ preventScroll: true }));
+    } else if (wasOpen.current) {
+      toggleRef.current?.focus({ preventScroll: true });
+    }
+    wasOpen.current = open;
+  }, [open]);
+
   const close = () => setOpen(false);
+  const onHero = !scrolled && !open;
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color] duration-500 ${
-        scrolled || open ? "bg-porcelain/92 backdrop-blur-md border-b border-line" : "border-b border-transparent"
-      }`}
-    >
-      <div className="mx-auto flex h-16 max-w-[1320px] items-center justify-between px-5 sm:px-8 lg:h-20 lg:px-12">
-        <a href="#top" aria-label="ALVEX home" onClick={close} className="relative z-10">
-          <Logo />
-        </a>
-
-        <nav aria-label="Primary" className="hidden xl:block">
-          <ul className="flex items-center gap-7">
-            {navigation.map((item) => (
-              <li key={item.label}>
-                <a
-                  href={item.href}
-                  className="link-indicator text-[14px] font-medium text-navy"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="flex items-center gap-3">
-          <a
-            href="#contact"
-            className="hidden min-h-11 items-center bg-navy px-5 text-[14px] font-semibold text-porcelain transition-colors hover:bg-midnight xl:inline-flex"
-          >
-            Start Your Project
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,color] duration-500 ease-editorial ${
+          open
+            ? "bg-midnight text-porcelain"
+            : onHero
+              ? "border-b border-transparent bg-transparent text-porcelain"
+              : "border-b border-line bg-porcelain/95 text-navy backdrop-blur-md"
+        }`}
+      >
+        <div className="mx-auto flex h-16 max-w-[1320px] items-center justify-between px-5 sm:px-8 lg:h-20 lg:px-12">
+          <a href="#top" aria-label="ALVEX, back to top" onClick={close} className="relative z-10">
+            <Logo tone={open || onHero ? "light" : "dark"} />
           </a>
-          <button
-            type="button"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            onClick={() => setOpen((v) => !v)}
-            className="relative z-10 flex h-12 w-12 items-center justify-center text-navy xl:hidden"
-          >
-            <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
-            <span className="relative block h-3.5 w-6" aria-hidden>
-              <span
-                className={`absolute left-0 right-0 top-0 h-px bg-current transition-transform duration-500 ${
-                  open ? "translate-y-[7px] rotate-45" : ""
-                }`}
-                style={{ transitionTimingFunction: "cubic-bezier(0.16,1,0.3,1)" }}
-              />
-              <span
-                className={`absolute bottom-0 left-0 right-0 h-px bg-current transition-transform duration-500 ${
-                  open ? "-translate-y-[7px] -rotate-45" : ""
-                }`}
-                style={{ transitionTimingFunction: "cubic-bezier(0.16,1,0.3,1)" }}
-              />
-            </span>
-          </button>
-        </div>
-      </div>
 
+          <nav aria-label="Primary" className="hidden xl:block">
+            <ul className="flex items-center gap-7">
+              {navigation.map((item) => (
+                <li key={item.label}>
+                  <a href={item.href} className="link-indicator text-[14px] font-medium text-current">
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <a
+              href="#contact"
+              className={`hidden min-h-11 items-center px-5 text-[14px] font-semibold transition-colors xl:inline-flex ${
+                onHero ? "bg-porcelain text-navy hover:bg-white" : "bg-navy text-porcelain hover:bg-midnight"
+              }`}
+            >
+              Start Your Project
+            </a>
+            <button
+              ref={toggleRef}
+              type="button"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? "Close menu" : "Open menu"}
+              onClick={() => setOpen((v) => !v)}
+              className="relative z-10 flex h-12 w-12 items-center justify-center xl:hidden"
+            >
+              <span className="relative block h-3.5 w-6" aria-hidden>
+                <span
+                  className={`absolute left-0 right-0 top-0 h-px bg-current transition-transform duration-500 ease-editorial ${
+                    open ? "translate-y-[7px] rotate-45" : ""
+                  }`}
+                />
+                <span
+                  className={`absolute bottom-0 left-0 right-0 h-px bg-current transition-transform duration-500 ease-editorial ${
+                    open ? "-translate-y-[7px] -rotate-45" : ""
+                  }`}
+                />
+              </span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Sibling of the header, so the fixed overlay is sized to the viewport. */}
       <AnimatePresence>
         {open ? (
           <motion.div
-            id="mobile-menu"
             key="mobile-menu"
-            initial={reduce ? false : { clipPath: "inset(0 0 100% 0)" }}
-            animate={{ clipPath: "inset(0 0 0% 0)" }}
-            exit={reduce ? { opacity: 0 } : { clipPath: "inset(0 0 100% 0)" }}
-            transition={{ duration: 0.6, ease }}
-            className="fixed inset-0 top-16 flex flex-col bg-porcelain xl:hidden"
+            id="mobile-menu"
+            ref={menuRef}
+            initial={reduce ? { opacity: 1 } : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduce ? 0 : 0.35, ease }}
+            className="fixed inset-0 z-40 flex flex-col overflow-y-auto overscroll-contain bg-midnight pt-16 text-porcelain xl:hidden"
           >
-            <nav aria-label="Mobile" className="flex-1 overflow-y-auto px-5 pb-10 pt-6">
-              <ul className="divide-y divide-line border-y border-line">
+            <nav aria-label="Mobile" className="flex flex-1 flex-col px-5 pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-6">
+              <ul className="border-t border-white/12">
                 {navigation.map((item, i) => (
                   <motion.li
                     key={item.label}
-                    initial={reduce ? false : { opacity: 0, y: 12 }}
+                    initial={reduce ? false : { opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: reduce ? 0 : 0.1 + i * 0.04, duration: 0.5, ease }}
+                    transition={{ delay: reduce ? 0 : 0.08 + i * 0.035, duration: 0.45, ease }}
+                    className="border-b border-white/12"
                   >
                     <a
                       href={item.href}
                       onClick={close}
-                      className="flex min-h-14 items-center justify-between py-3 font-display text-[26px] font-semibold tracking-tight text-navy"
+                      className="flex min-h-14 items-center justify-between py-3 font-display text-[26px] font-semibold tracking-tight"
                     >
                       {item.label}
-                      <span aria-hidden className="text-steel-deep">→</span>
+                      <span aria-hidden className="text-accent-soft">→</span>
                     </a>
                   </motion.li>
                 ))}
@@ -126,14 +176,15 @@ export function SiteHeader() {
               <a
                 href="#contact"
                 onClick={close}
-                className="mt-8 flex min-h-14 items-center justify-center bg-navy text-[16px] font-semibold text-porcelain"
+                className="mt-8 flex min-h-14 items-center justify-center bg-porcelain text-[16px] font-semibold text-navy"
               >
                 Start Your Project
               </a>
+              <p className="mt-auto pt-10 text-[13px] text-steel-light">Yiwu, Zhejiang, China</p>
             </nav>
           </motion.div>
         ) : null}
       </AnimatePresence>
-    </header>
+    </>
   );
 }
