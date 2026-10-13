@@ -1,50 +1,85 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { services, contact } from "@/content/site";
 
 /**
- * Project inquiry. There is no server-side backend yet, so this form does not
- * claim to send a message. On submit it opens the visitor's email app with the
- * request filled in and addressed to ALVEX. The notice under the button says
- * this plainly. When a backend is configured, replace the handler and remove
- * the notice.
+ * Project inquiry. Submits to /api/inquiry, which validates the input,
+ * applies spam checks and delivers to alvextrade1@gmail.com once the mail
+ * provider is configured. Every outcome is shown explicitly. The success
+ * message appears only when the server confirms delivery.
  */
+
+type Status =
+  | { kind: "idle" }
+  | { kind: "invalid"; message: string }
+  | { kind: "sending" }
+  | { kind: "sent" }
+  | { kind: "not_configured" }
+  | { kind: "error"; message: string };
 
 const field =
   "w-full border-0 border-b border-navy/25 bg-transparent px-0 py-3 text-[16px] text-navy placeholder:text-steel focus:border-navy focus:outline-none focus:ring-0";
 const label = "block text-[13px] font-semibold tracking-[0.01em] text-steel-deep";
 
 export function InquiryForm() {
-  const [status, setStatus] = useState<"idle" | "invalid">("idle");
+  const [status, setStatus] = useState<Status>({ kind: "idle" });
+  const startedAt = useRef<number>(0);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-    const get = (k: string) => String(form.get(k) ?? "").trim();
-    if (!get("name") || !get("email") || !get("requirements")) {
-      setStatus("invalid");
+    const payload: Record<string, unknown> = Object.fromEntries(
+      ["name", "email", "company", "country", "service", "category", "quantity", "requirements", "website"].map((k) => [
+        k,
+        String(form.get(k) ?? ""),
+      ]),
+    );
+    payload.startedAt = startedAt.current;
+
+    if (!String(payload.name).trim() || !String(payload.email).trim() || String(payload.requirements).trim().length < 10) {
+      setStatus({ kind: "invalid", message: "Please add your name, a valid email and a short description of the project." });
       return;
     }
-    setStatus("idle");
-    const body = [
-      `Name: ${get("name")}`,
-      `Company: ${get("company") || "-"}`,
-      `Email: ${get("email")}`,
-      `Country: ${get("country") || "-"}`,
-      `Service: ${get("service") || "-"}`,
-      `Product or sourcing category: ${get("category") || "-"}`,
-      `Estimated quantity: ${get("quantity") || "-"}`,
-      "",
-      "Project requirements:",
-      get("requirements"),
-    ].join("\n");
-    const subject = `Project enquiry — ${get("company") || get("name")}`;
-    window.location.href = `mailto:${contact.email.label}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    setStatus({ kind: "sending" });
+    try {
+      const res = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; code?: string; error?: string };
+      if (res.ok && data.ok) {
+        setStatus({ kind: "sent" });
+        e.currentTarget.reset();
+        startedAt.current = Date.now();
+        return;
+      }
+      if (data.code === "not_configured") {
+        setStatus({ kind: "not_configured" });
+        return;
+      }
+      setStatus({ kind: "error", message: data.error ?? "We could not send your enquiry. Please try again." });
+    } catch {
+      setStatus({ kind: "error", message: "The connection failed. Please try again, or email us directly." });
+    }
   };
 
+  const busy = status.kind === "sending";
+
   return (
-    <form onSubmit={onSubmit} noValidate aria-describedby="inquiry-note" className="grid gap-9 sm:grid-cols-2 sm:gap-x-10">
+    <form onSubmit={onSubmit} noValidate className="grid gap-9 sm:grid-cols-2 sm:gap-x-10">
+      {/* Honeypot: hidden from people and assistive technology. */}
+      <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div className="sm:col-span-2">
         <label htmlFor="service" className={label}>Service</label>
         <select id="service" name="service" defaultValue="" className={`${field} appearance-none`}>
@@ -101,16 +136,34 @@ export function InquiryForm() {
       <div className="sm:col-span-2">
         <button
           type="submit"
-          className="inline-flex min-h-13 items-center justify-center gap-3 bg-navy px-8 py-4 text-[15px] font-semibold text-porcelain transition-colors duration-300 hover:bg-navy/85 active:bg-midnight"
+          disabled={busy}
+          aria-busy={busy}
+          className="inline-flex min-h-13 items-center justify-center gap-3 bg-navy px-8 py-4 text-[15px] font-semibold text-porcelain transition-colors duration-300 hover:bg-navy/85 active:bg-midnight disabled:cursor-wait disabled:opacity-70"
         >
-          Prepare my enquiry
-          <span aria-hidden>→</span>
+          {busy ? "Sending…" : "Send enquiry"}
+          {!busy && <span aria-hidden>→</span>}
         </button>
-        <p id="inquiry-note" className="mt-4 max-w-[36rem] text-[14px] leading-[1.6] text-steel-deep" role="status">
-          {status === "invalid"
-            ? "Please add your name, email and project requirements."
-            : "This opens your email app with the request addressed to ALVEX. Nothing is sent from this page."}
-        </p>
+
+        <div role="status" aria-live="polite" className="mt-5 max-w-[38rem] text-[15px] leading-[1.6]">
+          {status.kind === "idle" && (
+            <p className="text-steel-deep">We reply by email, usually within one working day.</p>
+          )}
+          {status.kind === "invalid" && <p className="text-[#8a1f1f]">{status.message}</p>}
+          {status.kind === "sending" && <p className="text-steel-deep">Sending your enquiry…</p>}
+          {status.kind === "sent" && (
+            <p className="text-navy">
+              <strong className="font-semibold">Thank you.</strong> Your enquiry has been sent to ALVEX. We reply by
+              email.
+            </p>
+          )}
+          {status.kind === "not_configured" && (
+            <p className="text-[#8a1f1f]">
+              Online submission is not active yet. Please email{" "}
+              <a className="underline" href={contact.email.href}>{contact.email.label}</a> directly.
+            </p>
+          )}
+          {status.kind === "error" && <p className="text-[#8a1f1f]">{status.message}</p>}
+        </div>
       </div>
     </form>
   );
