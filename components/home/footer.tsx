@@ -1,7 +1,8 @@
 import { brand, contact, navigation } from "@/content/site";
 import { Logo } from "@/components/brand/logo";
 
-export function SiteFooter() {
+/** `base` prefixes section links, so the footer works on inner pages too. */
+export function SiteFooter({ base = "" }: { base?: string }) {
   return (
     <footer id="site-footer" className="bg-midnight text-porcelain">
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-12 border-t border-white/12 px-5 py-16 sm:px-8 md:grid-cols-12 lg:px-12">
@@ -18,7 +19,7 @@ export function SiteFooter() {
           <ul className="space-y-1">
             {navigation.map((item) => (
               <li key={item.label}>
-                <a href={item.href} className="link-indicator py-1.5 text-[15px] text-white/85 hover:text-white">
+                <a href={`${base}${item.href}`} className="link-indicator py-1.5 text-[15px] text-white/85 hover:text-white">
                   {item.label}
                 </a>
               </li>
@@ -42,7 +43,7 @@ export function SiteFooter() {
 
       <div className="mx-auto flex max-w-[1320px] flex-col gap-4 border-t border-white/12 px-5 py-6 text-[13px] text-white/65 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
         <p>© 2026 ALVEX. All rights reserved.</p>
-
+        <p className="text-white/50">Based in China. ALVEX is not affiliated with the Canton Fair organisers.</p>
       </div>
     </footer>
   );

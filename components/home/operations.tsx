@@ -28,19 +28,19 @@ const activities = [
 
 function MediaFrame() {
   return (
-    <div aria-hidden className="relative aspect-[4/3] w-full overflow-hidden bg-navy">
-      <svg viewBox="0 0 400 300" className="absolute inset-0 h-full w-full" fill="none" preserveAspectRatio="xMidYMid slice">
-        {Array.from({ length: 9 }, (_, i) => (
-          <line key={`v${i}`} x1={i * 50} y1="0" x2={i * 50} y2="300" stroke="#F7F8FA" strokeOpacity="0.06" />
-        ))}
-        {Array.from({ length: 7 }, (_, i) => (
-          <line key={`h${i}`} x1="0" y1={i * 50} x2="400" y2={i * 50} stroke="#F7F8FA" strokeOpacity="0.06" />
-        ))}
-        <path d="M40 240 L140 170 L220 200 L330 110" stroke="#537CFF" strokeOpacity="0.6" strokeWidth="1" strokeDasharray="2 6" />
-        <circle cx="40" cy="240" r="5" fill="#8FA8FF" />
-        <circle cx="330" cy="110" r="5" fill="#8FA8FF" />
-      </svg>
-    </div>
+    <figure>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/insight-verification.jpg"
+        alt="Precision measuring tools beside a small product sample"
+        width={1264}
+        height={848}
+        loading="lazy"
+        decoding="async"
+        className="aspect-[4/3] w-full object-cover"
+      />
+      <figcaption className="mt-3 text-[13px] text-steel-deep">Illustrative image.</figcaption>
+    </figure>
   );
 }
 
