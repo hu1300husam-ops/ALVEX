@@ -1,8 +1,7 @@
 import { brand, contact, navigation } from "@/content/site";
 import { Logo } from "@/components/brand/logo";
 
-/** `base` prefixes section links, so the footer works on inner pages too. */
-export function SiteFooter({ base = "" }: { base?: string }) {
+export function SiteFooter() {
   return (
     <footer id="site-footer" className="bg-midnight text-porcelain">
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-12 border-t border-white/12 px-5 py-16 sm:px-8 md:grid-cols-12 lg:px-12">
@@ -19,7 +18,7 @@ export function SiteFooter({ base = "" }: { base?: string }) {
           <ul className="space-y-1">
             {navigation.map((item) => (
               <li key={item.label}>
-                <a href={`${base}${item.href}`} className="link-indicator py-1.5 text-[15px] text-white/85 hover:text-white">
+                <a href={item.href} className="link-indicator py-1.5 text-[15px] text-white/85 hover:text-white">
                   {item.label}
                 </a>
               </li>

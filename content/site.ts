@@ -38,13 +38,13 @@ export const contact = {
 } as const;
 
 export const navigation = [
-  { label: "Services", href: "#services" },
-  { label: "How We Work", href: "#how-we-work" },
-  { label: "Our Operations", href: "#operations" },
-  { label: "Events & Exhibitions", href: "#canton-fair" },
-  { label: "About", href: "#about" },
-  { label: "Insights", href: "#insights" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/services" },
+  { label: "How We Work", href: "/#how-we-work" },
+  { label: "Our Operations", href: "/#operations" },
+  { label: "Events & Exhibitions", href: "/canton-fair" },
+  { label: "About", href: "/about" },
+  { label: "Insights", href: "/insights" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 export type Service = {

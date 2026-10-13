@@ -48,6 +48,8 @@ Status as of this commit. Every item below is a development asset unless marked 
 | `public/images/insight-supplier-evaluation.jpg` | Homepage Insights, meeting article | Generated still life of a notebook, pen and calculator. |
 | `public/images/insight-terms.jpg` | Homepage Insights, FOB/CIF article | Generated still life. Map lines are not legible text. |
 | `public/images/canton-hall.jpg` | Canton Fair section | Generated exhibition-hall interior. Captioned "Not an ALVEX event." No logos, flags or landmarks. |
+| `public/images/service-warehouse.jpg` | Services index, Warehousing service page | Generated concept image of an empty, organised warehouse. No text or identifiable site. |
+| `public/images/service-factory.jpg` | Services index, Factory visits service page | Generated concept image of a production line. No people or identifiable factory. |
 
 - These are generated concept images, not photographs of ALVEX work. Do not describe them as company documentation.
 - The kit photos `02_Trade_and_Sourcing/factory_production.webp` and `quality_inspection.webp` are not used.

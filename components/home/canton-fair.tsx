@@ -84,7 +84,7 @@ export function CantonFair() {
           official representative of the fair&apos;s organisers.
         </p>
         <a
-          href="#contact"
+          href="/canton-fair"
           className="mt-8 inline-flex min-h-13 items-center gap-3 border-b border-porcelain pb-1 text-[15px] font-semibold text-porcelain transition-colors hover:text-[#8FA8FF]"
         >
           Plan your Canton Fair support

@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { articles, getArticle, type ArticleBlock } from "@/content/articles";
-import { Logo } from "@/components/brand/logo";
-import { SiteFooter } from "@/components/home/footer";
+import { PageShell } from "@/components/site/page-shell";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -66,28 +65,11 @@ export default async function ArticlePage({ params }: Props) {
   const others = articles.filter((a) => a.slug !== article.slug);
 
   return (
-    <>
-      <a
-        href="#article"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-navy focus:px-4 focus:py-3 focus:text-porcelain"
-      >
-        Skip to article
-      </a>
-      <header className="sticky top-0 z-50 border-b border-line bg-porcelain/95 text-navy backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-[1320px] items-center justify-between px-5 sm:px-8 lg:h-20 lg:px-12">
-          <Link href="/" aria-label="ALVEX, back to homepage" className="relative z-10">
-            <Logo tone="dark" />
-          </Link>
-          <Link href="/#insights" className="link-indicator text-[14px] font-medium">
-            All insights
-          </Link>
-        </div>
-      </header>
-
-      <main id="article">
+    <PageShell>
+      <div>
         <article>
           <div className="bg-navy text-porcelain">
-            <div className="mx-auto max-w-[920px] px-5 pb-16 pt-16 sm:px-8 md:pt-24 lg:px-12">
+            <div className="mx-auto max-w-[920px] px-5 pb-16 pt-36 sm:px-8 md:pt-44 lg:px-12">
               <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-steel-light">
                 Insights · {article.readMinutes} min read
               </p>
@@ -127,7 +109,7 @@ export default async function ArticlePage({ params }: Props) {
                 Tell us what you are buying and we will reply with the next practical step.
               </p>
               <Link
-                href="/#contact"
+                href="/contact"
                 className="mt-6 inline-flex min-h-13 items-center gap-3 bg-navy px-7 py-4 text-[15px] font-semibold text-porcelain transition-colors hover:bg-midnight"
               >
                 Start Your Project <span aria-hidden>→</span>
@@ -160,9 +142,7 @@ export default async function ArticlePage({ params }: Props) {
             </ul>
           </div>
         </section>
-      </main>
-
-      <SiteFooter base="/" />
-    </>
+      </div>
+    </PageShell>
   );
 }

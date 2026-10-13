@@ -21,7 +21,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
  * focus moves into the menu on open and returns to the toggle on close, page
  * content is made inert and scroll-locked while open, and any link closes it.
  */
-export function SiteHeader() {
+export function SiteHeader({ solid = false }: { solid?: boolean }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -74,7 +74,7 @@ export function SiteHeader() {
   }, [open]);
 
   const close = () => setOpen(false);
-  const onHero = !scrolled && !open;
+  const onHero = !solid && !scrolled && !open;
 
   return (
     <>
@@ -88,7 +88,7 @@ export function SiteHeader() {
         }`}
       >
         <div className="mx-auto flex h-16 max-w-[1320px] items-center justify-between px-5 sm:px-8 lg:h-20 lg:px-12">
-          <a href="#top" aria-label="ALVEX, back to top" onClick={close} className="relative z-10">
+          <a href="/" aria-label="ALVEX, back to homepage" onClick={close} className="relative z-10">
             <Logo tone={open || onHero ? "light" : "dark"} />
           </a>
 
@@ -106,7 +106,7 @@ export function SiteHeader() {
 
           <div className="flex items-center gap-3">
             <a
-              href="#contact"
+              href="/contact"
               className={`hidden min-h-11 items-center px-5 text-[14px] font-semibold transition-colors xl:inline-flex ${
                 onHero ? "bg-porcelain text-navy hover:bg-white" : "bg-navy text-porcelain hover:bg-midnight"
               }`}
@@ -174,7 +174,7 @@ export function SiteHeader() {
                 ))}
               </ul>
               <a
-                href="#contact"
+                href="/contact"
                 onClick={close}
                 className="mt-8 flex min-h-14 items-center justify-center bg-porcelain text-[16px] font-semibold text-navy"
               >

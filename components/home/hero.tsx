@@ -93,7 +93,7 @@ export function Hero() {
               <span aria-hidden className="transition-transform duration-500 group-hover:translate-x-1">→</span>
             </a>
             <a
-              href="#contact"
+              href="/contact"
               className="inline-flex min-h-13 items-center justify-center border border-porcelain/40 px-7 py-4 text-[15px] font-semibold text-porcelain transition-colors duration-300 hover:border-porcelain hover:bg-porcelain/5 active:bg-porcelain/10"
             >
               Start Your Project
