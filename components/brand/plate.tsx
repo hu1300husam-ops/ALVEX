@@ -59,19 +59,19 @@ export function Plate({ ratio = "4 / 5", tone = "navy", className = "", src, alt
 }
 
 /**
- * Yiwu coordinates: the one place-based fact on the page, set as a
- * typographic detail rather than a picture.
+ * Company location, set as a typographic detail rather than a picture.
+ * Based in China; no city or coordinates are claimed.
  */
 export function Coordinates({ className = "" }: { className?: string }) {
   return (
     <p className={`font-display text-[11px] font-semibold uppercase tracking-[0.22em] tabular-nums ${className}`}>
-      29.3° N &nbsp;·&nbsp; 120.1° E
+      Based in China
     </p>
   );
 }
 
 /**
- * The bridge: Yiwu to the buyer's market, as a single hairline arc.
+ * The bridge: China to the buyer's market, as a single hairline arc.
  * Used as the homepage hero composition. The arc draws on load, and only
  * when motion is allowed (see globals.css).
  */
@@ -79,7 +79,7 @@ export function BridgePlate({ className = "" }: { className?: string }) {
   return (
     <div
       role="img"
-      aria-label="Diagram: an arc connects Yiwu, China with the market of an international buyer."
+      aria-label="Diagram: an arc connects China with the market of an international buyer."
       className={`relative w-full max-w-full overflow-hidden bg-navy text-porcelain ${className}`}
       style={{ aspectRatio: "4 / 5" }}
     >
@@ -112,7 +112,7 @@ export function BridgePlate({ className = "" }: { className?: string }) {
       </svg>
       <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4">
         <div>
-          <p className="font-display text-[15px] font-semibold tracking-tight">Yiwu, China</p>
+          <p className="font-display text-[15px] font-semibold tracking-tight">China</p>
           <Coordinates className="mt-1 text-steel-light" />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { brand } from "@/content/site";
 import { Reveal } from "@/components/ui/reveal";
-import { Coordinates, Plate } from "@/components/brand/plate";
+import { Plate } from "@/components/brand/plate";
 
 const principles = [
   {
@@ -49,7 +49,6 @@ export function About() {
           <Reveal className="lg:col-span-5 lg:col-start-1">
             <Plate ratio="4 / 3" tone="porcelain" className="border border-line">
               <div className="absolute inset-0 flex flex-col justify-between p-8">
-                <Coordinates className="text-steel-deep" />
                 <p className="font-display text-[clamp(28px,3.4vw,40px)] font-semibold leading-[1.1] tracking-[-0.02em] text-navy">
                   An operating company, not a directory.
                 </p>

@@ -180,7 +180,7 @@ export function SiteHeader() {
               >
                 Start Your Project
               </a>
-              <p className="mt-auto pt-10 text-[13px] text-steel-light">Yiwu, Zhejiang, China</p>
+              <p className="mt-auto pt-10 text-[13px] text-steel-light">Based in China</p>
             </nav>
           </motion.div>
         ) : null}

@@ -11,15 +11,15 @@ export const brand = {
    * and give its intrinsic size. `null` keeps the neutral typeset fallback.
    */
   logo: {
-    src: null as string | null,
-    width: 0,
-    height: 0,
+    src: "/brand/alvex_wordmark_original.png" as string | null,
+    width: 1040,
+    height: 237,
     alt: "ALVEX",
   },
   legalName: "ALVEX Company",
   positioning: "Your Business Bridge to China.",
   supportingLine: "Your Team on the Ground in China.",
-  location: { city: "Yiwu", country: "China", verified: true },
+  location: { country: "China", verified: true },
   description:
     "ALVEX supports international buyers and businesses with commercial activities in China, from sourcing and supplier verification to commercial coordination and trade support.",
 } as const;
