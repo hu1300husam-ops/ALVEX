@@ -1,0 +1,52 @@
+import { brand, contact, navigation } from "@/content/site";
+import { Logo } from "./logo";
+
+export function SiteFooter() {
+  return (
+    <footer className="bg-midnight text-porcelain">
+      <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-12 border-t border-white/12 px-5 py-16 sm:px-8 md:grid-cols-12 lg:px-12">
+        <div className="md:col-span-5">
+          <Logo tone="light" />
+          <p className="mt-6 max-w-[24rem] font-display text-[22px] font-semibold leading-snug tracking-tight">
+            {brand.positioning}
+          </p>
+          <p className="mt-3 max-w-[26rem] text-[15px] leading-[1.6] text-white/65">{brand.supportingLine}</p>
+        </div>
+
+        <nav aria-label="Footer" className="md:col-span-3">
+          <p className="mb-5 text-[12px] font-semibold uppercase tracking-[0.18em] text-steel">Explore</p>
+          <ul className="space-y-1">
+            {navigation.map((item) => (
+              <li key={item.label}>
+                <a href={item.href} className="link-indicator py-1.5 text-[15px] text-white/85 hover:text-white">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="md:col-span-4">
+          <p className="mb-5 text-[12px] font-semibold uppercase tracking-[0.18em] text-steel">Contact</p>
+          <ul className="space-y-3 text-[15px] text-white/85">
+            <li>{contact.phone.label}</li>
+            <li>
+              <a href={contact.email.href} className="link-indicator">{contact.email.label}</a>
+            </li>
+            <li>WeChat · {contact.wechat.label}</li>
+            <li>{contact.social.label}</li>
+            <li className="pt-2 text-white/60">Yiwu, China</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="mx-auto flex max-w-[1320px] flex-col gap-4 border-t border-white/12 px-5 py-6 text-[13px] text-white/55 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
+        <p>© 2026 ALVEX. All rights reserved.</p>
+        <p className="flex gap-6">
+          <span>Privacy notice — in preparation</span>
+          <span>Terms — in preparation</span>
+        </p>
+      </div>
+    </footer>
+  );
+}

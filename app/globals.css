@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #192440;
+  --color-midnight: #10192d;
+  --color-porcelain: #f7f8fa;
+  --color-steel: #8793a5;
+  --color-steel-deep: #5d6778;
+  --color-accent: #537cff;
+  --color-ink: #2b3445;
+  --color-line: #d5dae3;
+
+  --font-sans: "Manrope", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --text-display-xl: clamp(2.25rem, 0.9rem + 6vw, 7rem);
+  --text-display-l: clamp(2.5rem, 1.4rem + 4.2vw, 5rem);
+  --text-display-m: clamp(2rem, 1.3rem + 2.6vw, 3.5rem);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    background: var(--color-porcelain);
+    color: var(--color-midnight);
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--color-navy);
+    color: var(--color-porcelain);
+  }
+}
+
+@layer utilities {
+  .hairline {
+    border-color: color-mix(in oklab, var(--color-navy) 16%, transparent);
+  }
+  .figure-placeholder {
+    background-color: #e6e9ef;
+    background-image: repeating-linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.5) 0 1px,
+      transparent 1px 14px
+    );
+  }
+  .figure-placeholder-dark {
+    background-color: #1c2946;
+    background-image: repeating-linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.04) 0 1px,
+      transparent 1px 14px
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@theme {
+  --font-display: var(--font-sans);
+}
+
+@layer components {
+  /* Animated link indicator: a hairline that draws in on hover and focus. */
+  .link-indicator {
+    position: relative;
+    display: inline-block;
+    padding-block: 0.25rem;
+  }
+  .link-indicator::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .link-indicator:hover::after,
+  .link-indicator:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
