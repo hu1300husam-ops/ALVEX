@@ -7,10 +7,12 @@
   --color-steel: #8793a5;
   --color-steel-deep: #5d6778;
   --color-accent: #537cff;
+  --color-accent-soft: #8fa8ff; /* accent for text on dark surfaces (AA) */
+  --color-steel-light: #aab4c5; /* labels on dark surfaces (AA) */
   --color-ink: #2b3445;
   --color-line: #d5dae3;
 
-  --font-sans: "Manrope", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Manrope Variable", Manrope, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   --text-display-xl: clamp(2.25rem, 0.9rem + 6vw, 7rem);
   --text-display-l: clamp(2.5rem, 1.4rem + 4.2vw, 5rem);
@@ -76,6 +78,7 @@
 
 @theme {
   --font-display: var(--font-sans);
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer components {
@@ -101,5 +104,25 @@
   .link-indicator:focus-visible::after {
     transform: scaleX(1);
     transform-origin: left;
+  }
+}
+
+/* Bridge arc: draws in once on load. Static for reduced motion. */
+@layer components {
+  .bridge-arc {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: bridge-draw 2.2s var(--ease-editorial) 0.4s forwards;
+  }
+  @keyframes bridge-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bridge-arc {
+    animation: none;
+    stroke-dashoffset: 0;
   }
 }

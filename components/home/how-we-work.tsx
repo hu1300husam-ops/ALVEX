@@ -80,7 +80,7 @@ export function HowWeWork() {
               >
                 <span
                   className={`font-display text-[15px] font-semibold tabular-nums transition-colors duration-700 ${
-                    isActive ? "text-accent" : "text-steel"
+                    isActive ? "text-navy" : "text-steel-deep"
                   }`}
                 >
                   {stage.step}
@@ -88,14 +88,14 @@ export function HowWeWork() {
                 <div>
                   <h3
                     className={`font-display text-[32px] font-semibold leading-none tracking-[-0.02em] transition-colors duration-700 sm:text-[44px] ${
-                      isActive ? "text-navy" : "text-steel"
+                      isActive ? "text-navy" : "text-steel-deep"
                     }`}
                   >
                     {stage.title}
                   </h3>
                   <p
                     className={`mt-5 max-w-[30rem] text-[17px] leading-[1.65] transition-opacity duration-700 ${
-                      isActive ? "text-ink opacity-100" : "text-steel-deep opacity-70"
+                      isActive ? "text-ink opacity-100" : "text-steel-deep"
                     }`}
                   >
                     {stage.text}

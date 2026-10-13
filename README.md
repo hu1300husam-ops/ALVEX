@@ -4,8 +4,9 @@ Business bridge to China: sourcing, supplier verification, commercial coordinati
 
 ## Status
 
-- **Stage:** Homepage (Direction A — "The Ledger") implemented for review.
-- **Not built yet, by design:** inner pages (Services detail, How We Work, Our Operations, Canton Fair, About, Insights, Contact, the Start Your Project form). They wait for the homepage direction to be approved.
+- **Stage:** Homepage visual refinement (Phase 1 and 2) for review. Inner pages wait for approval.
+- **Review screenshots:** `docs/review/homepage/`
+- **Not built yet, by design:** inner pages and the Start Your Project form. They wait for the homepage direction to be approved.
 
 ## Creative directions
 
@@ -43,9 +44,9 @@ These are deliberate. Nothing below is invented; each item is either a placehold
 
 | Item | Current state |
 |---|---|
-| ALVEX logo | Text placeholder in `components/home/logo.tsx`. Replace with the supplied SVG. |
-| Photography | All image frames are labelled placeholders (`components/ui/figure.tsx`). Use only approved ALVEX photos with usage rights. |
-| Typeface | Manrope is declared in the font stack but not bundled (no font download in the build environment). Add it via `next/font` once the font files are available. |
+| ALVEX logo | Not yet supplied. The uploaded `ALVEX logo.pdf` was not present in the workspace. Once provided, add the SVG to `/public/brand/` and set `brand.logo` in `content/site.ts`. The component is `components/brand/logo.tsx`. |
+| Photography | Not yet supplied. Homepage uses designed brand plates (`components/brand/plate.tsx`) with no stock imagery. Approved photos can be passed as `src` / `alt`. |
+| Typeface | Manrope Variable is self-hosted via `@fontsource-variable/manrope`. |
 | WhatsApp `+86 147 2700 7000` | Link is live. Activity still needs confirmation (`content/site.ts`). |
 | Social handle `alvexcompany` | Platform unconfirmed; shown only as "ALVEX Company". |
 | Site domain | `NEXT_PUBLIC_SITE_URL` defaults to a placeholder. Set it to the real domain for canonical URLs, sitemap and Open Graph. |
