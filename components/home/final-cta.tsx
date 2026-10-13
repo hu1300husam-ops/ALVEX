@@ -32,7 +32,7 @@ export function FinalCta() {
       <div className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32 lg:px-12">
         <div className="grid grid-cols-1 gap-x-6 gap-y-14 lg:grid-cols-12">
           <Reveal className="lg:col-span-8">
-            <p className="mb-6 text-[12px] font-semibold uppercase tracking-[0.2em] text-steel">09 — Start a conversation</p>
+            <p className="mb-6 text-[12px] font-semibold uppercase tracking-[0.2em] text-steel-light">09 — Start a conversation</p>
             <h2 id="contact-title" className="font-display text-display-l font-bold leading-[1] tracking-[-0.035em]">
               Let&rsquo;s build your next opportunity in China.
             </h2>
@@ -49,12 +49,12 @@ export function FinalCta() {
           </Reveal>
 
           <Reveal className="lg:col-span-4 lg:self-end" delay={0.1}>
-            <p className="mb-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-steel">Or reach us directly</p>
+            <p className="mb-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-steel-light">Or reach us directly</p>
             <ul className="divide-y divide-white/12 border-y border-white/12 text-[16px]">
               <li>
                 <a href={contact.whatsapp.href} target="_blank" rel="noopener noreferrer" className="flex min-h-14 items-center justify-between gap-4 py-3 transition-colors hover:text-white">
                   <span>
-                    <span className="block text-[12px] uppercase tracking-[0.14em] text-steel">WhatsApp</span>
+                    <span className="block text-[12px] uppercase tracking-[0.14em] text-steel-light">WhatsApp</span>
                     {contact.whatsapp.label}
                   </span>
                   <span aria-hidden>→</span>
@@ -63,16 +63,16 @@ export function FinalCta() {
               <li>
                 <button type="button" onClick={copyWeChat} className="flex min-h-14 w-full items-center justify-between gap-4 py-3 text-left transition-colors hover:text-white">
                   <span>
-                    <span className="block text-[12px] uppercase tracking-[0.14em] text-steel">WeChat · tap to copy ID</span>
+                    <span className="block text-[12px] uppercase tracking-[0.14em] text-steel-light">WeChat · tap to copy ID</span>
                     {contact.wechat.label}
                   </span>
-                  <span className="text-[13px] text-steel" aria-live="polite">{copied ? "Copied" : "Copy"}</span>
+                  <span className="text-[13px] text-steel-light" aria-live="polite">{copied ? "Copied" : "Copy"}</span>
                 </button>
               </li>
               <li>
                 <a href={contact.email.href} className="flex min-h-14 items-center justify-between gap-4 py-3 transition-colors hover:text-white">
                   <span>
-                    <span className="block text-[12px] uppercase tracking-[0.14em] text-steel">Email</span>
+                    <span className="block text-[12px] uppercase tracking-[0.14em] text-steel-light">Email</span>
                     {contact.email.label}
                   </span>
                   <span aria-hidden>→</span>
@@ -81,7 +81,7 @@ export function FinalCta() {
               <li>
                 <a href={contact.phone.href} className="flex min-h-14 items-center justify-between gap-4 py-3 transition-colors hover:text-white">
                   <span>
-                    <span className="block text-[12px] uppercase tracking-[0.14em] text-steel">Phone</span>
+                    <span className="block text-[12px] uppercase tracking-[0.14em] text-steel-light">Phone</span>
                     {contact.phone.label}
                   </span>
                   <span aria-hidden>→</span>

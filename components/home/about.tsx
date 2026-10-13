@@ -1,6 +1,6 @@
 import { brand } from "@/content/site";
 import { Reveal } from "@/components/ui/reveal";
-import { Figure } from "@/components/ui/figure";
+import { Coordinates, Plate } from "@/components/brand/plate";
 
 const principles = [
   {
@@ -36,7 +36,7 @@ export function About() {
             <ol className="divide-y divide-line border-y border-line">
               {principles.map((p, i) => (
                 <Reveal as="li" key={p.title} delay={i * 0.06} className="grid grid-cols-[2.5rem_1fr] gap-4 py-8">
-                  <span className="text-[13px] tabular-nums text-steel">0{i + 1}</span>
+                  <span className="text-[13px] tabular-nums text-steel-deep">0{i + 1}</span>
                   <div>
                     <p className="font-display text-[22px] font-semibold tracking-tight text-navy">{p.title}</p>
                     <p className="mt-2 text-[16px] leading-[1.65] text-ink">{p.text}</p>
@@ -47,11 +47,14 @@ export function About() {
           </div>
 
           <Reveal className="lg:col-span-5 lg:col-start-1">
-            <Figure
-              label="ALVEX team"
-              ratio="4 / 3"
-              caption="Team photograph and roles to be added once ALVEX confirms names, roles and usage rights."
-            />
+            <Plate ratio="4 / 3" tone="porcelain" className="border border-line">
+              <div className="absolute inset-0 flex flex-col justify-between p-8">
+                <Coordinates className="text-steel-deep" />
+                <p className="font-display text-[clamp(28px,3.4vw,40px)] font-semibold leading-[1.1] tracking-[-0.02em] text-navy">
+                  An operating company, not a directory.
+                </p>
+              </div>
+            </Plate>
           </Reveal>
         </div>
       </div>

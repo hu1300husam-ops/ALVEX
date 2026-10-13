@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/ui/reveal";
-import { Figure } from "@/components/ui/figure";
+import { Coordinates, Plate } from "@/components/brand/plate";
 
 const points = [
   {
@@ -8,7 +8,7 @@ const points = [
   },
   {
     title: "On-site commercial support",
-    text: "Meetings, factory visits and inspections carried out in person by our team, not handled remotely by message alone.",
+    text: "Meetings, factory visits and inspections carried out by our team in China, alongside remote communication.",
   },
   {
     title: "Language and negotiation",
@@ -20,56 +20,52 @@ export function Presence() {
   return (
     <section id="presence" aria-labelledby="presence-title" className="bg-porcelain">
       <div className="mx-auto max-w-[1320px] px-5 pb-24 sm:px-8 md:pb-32 lg:px-12">
-        <div className="grid grid-cols-1 gap-x-6 gap-y-12 border-t border-line pt-20 lg:grid-cols-12 md:pt-28">
-          <Reveal className="lg:col-span-7">
-            <p className="mb-6 text-[12px] font-semibold uppercase tracking-[0.2em] text-steel-deep">
-              04 — Our presence in China
-            </p>
-            <h2
-              id="presence-title"
-              className="font-display text-display-m font-bold leading-[1.02] tracking-[-0.03em] text-navy"
+        <Reveal className="grid grid-cols-1 gap-6 pt-20 md:pt-28 lg:grid-cols-12">
+          <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-steel-deep lg:col-span-3">
+            04 — Our presence in China
+          </p>
+          <h2
+            id="presence-title"
+            className="font-display text-display-m font-bold leading-[1.04] tracking-[-0.03em] text-navy lg:col-span-8"
+          >
+            On the ground in China. Connected to your business.
+          </h2>
+        </Reveal>
+
+        {/* Place band: the company's one location, set as a full-width typographic plate. */}
+        <Reveal className="mt-16 md:mt-20">
+          <Plate ratio="21 / 9" tone="navy" className="min-h-[320px]" grid="fine">
+            <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-10 lg:p-14">
+              <Coordinates className="text-steel-light" />
+              <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+                <p className="font-display text-[clamp(48px,8vw,128px)] font-bold leading-[0.9] tracking-[-0.045em]">
+                  Yiwu
+                </p>
+                <p className="max-w-[24rem] text-[15px] leading-[1.6] text-white/80">
+                  Zhejiang Province, China. Our base for sourcing, supplier communication and on-site commercial
+                  support.
+                </p>
+              </div>
+            </div>
+          </Plate>
+        </Reveal>
+
+        <ol className="mt-16 grid grid-cols-1 md:grid-cols-3 md:gap-0">
+          {points.map((p, i) => (
+            <Reveal
+              as="li"
+              key={p.title}
+              delay={i * 0.06}
+              className="border-t border-navy/15 py-8 md:px-8 md:first:pl-0 md:last:pr-0 md:[&:not(:first-child)]:border-l md:[&:not(:first-child)]:border-navy/15"
             >
-              On the ground in China. Connected to your business.
-            </h2>
-          </Reveal>
-
-          <Reveal className="lg:col-span-4 lg:col-start-9 lg:self-end">
-            <dl className="space-y-6 border-l-2 border-accent pl-6">
-              <div>
-                <dt className="text-[12px] font-semibold uppercase tracking-[0.16em] text-steel-deep">Base</dt>
-                <dd className="mt-1 font-display text-[22px] font-semibold text-navy">Yiwu, Zhejiang, China</dd>
-              </div>
-              <div>
-                <dt className="text-[12px] font-semibold uppercase tracking-[0.16em] text-steel-deep">Working in</dt>
-                <dd className="mt-1 text-[16px] leading-[1.6] text-ink">
-                  Chinese and English, with international buyers across sourcing, negotiation and trade support.
-                </dd>
-              </div>
-            </dl>
-          </Reveal>
-
-          <Reveal className="lg:col-span-6 lg:col-start-1">
-            <Figure
-              label="Yiwu market or team on location"
-              ratio="5 / 4"
-              caption="Authentic Yiwu imagery to be supplied by ALVEX. Stock photography is not used to represent the company."
-            />
-          </Reveal>
-
-          <div className="lg:col-span-5 lg:col-start-8 lg:pt-10">
-            <ol className="divide-y divide-line border-y border-line">
-              {points.map((p, i) => (
-                <Reveal as="li" key={p.title} delay={i * 0.06} className="py-7">
-                  <p className="font-display text-[20px] font-semibold tracking-tight text-navy">
-                    <span className="mr-3 text-[13px] tabular-nums text-steel">0{i + 1}</span>
-                    {p.title}
-                  </p>
-                  <p className="mt-3 text-[16px] leading-[1.65] text-ink">{p.text}</p>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
-        </div>
+              <p className="flex items-baseline gap-3 font-display text-[20px] font-semibold tracking-tight text-navy">
+                <span className="text-[13px] tabular-nums text-steel-deep">0{i + 1}</span>
+                {p.title}
+              </p>
+              <p className="mt-3 text-[16px] leading-[1.65] text-ink">{p.text}</p>
+            </Reveal>
+          ))}
+        </ol>
       </div>
     </section>
   );

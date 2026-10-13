@@ -6,6 +6,16 @@
 
 export const brand = {
   name: "ALVEX",
+  /**
+   * Official logo. Set `src` to a file in /public (e.g. "/brand/alvex-logo.svg")
+   * and give its intrinsic size. `null` keeps the neutral typeset fallback.
+   */
+  logo: {
+    src: null as string | null,
+    width: 0,
+    height: 0,
+    alt: "ALVEX",
+  },
   legalName: "ALVEX Company",
   positioning: "Your Business Bridge to China.",
   supportingLine: "Your Team on the Ground in China.",

@@ -16,14 +16,14 @@ export function CantonFair() {
     >
       <div className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32 lg:px-12">
         <Reveal className="max-w-[60rem]">
-          <p className="mb-6 text-[12px] font-semibold uppercase tracking-[0.2em] text-steel">05 — Events & exhibitions</p>
+          <p className="mb-6 text-[12px] font-semibold uppercase tracking-[0.2em] text-steel-light">05 — Events & exhibitions</p>
           <h2
             id="canton-title"
             className="font-display text-display-l font-bold leading-[1] tracking-[-0.035em]"
           >
             Make every day at Canton Fair count.
           </h2>
-          <p className="mt-6 font-display text-[22px] font-medium tracking-tight text-steel sm:text-[26px]">
+          <p className="mt-6 font-display text-[22px] font-medium tracking-tight text-steel-light sm:text-[26px]">
             You fly home. <span className="text-porcelain">We keep working.</span>
           </p>
         </Reveal>
@@ -39,7 +39,7 @@ export function CantonFair() {
               className="relative md:px-8 md:first:pl-0 md:last:pr-0"
             >
               <span aria-hidden className="absolute left-0 top-0 hidden h-[3px] w-12 -translate-y-1/2 bg-accent md:block" />
-              <p className="pt-8 text-[12px] font-semibold uppercase tracking-[0.2em] text-steel">
+              <p className="pt-8 text-[12px] font-semibold uppercase tracking-[0.2em] text-steel-light">
                 0{i + 1} — {stage.label}
               </p>
               <p className="mt-5 font-display text-[44px] font-semibold leading-none tracking-[-0.03em] sm:text-[56px]">

@@ -1,5 +1,5 @@
 import { brand, contact, navigation } from "@/content/site";
-import { Logo } from "./logo";
+import { Logo } from "@/components/brand/logo";
 
 export function SiteFooter() {
   return (
@@ -14,7 +14,7 @@ export function SiteFooter() {
         </div>
 
         <nav aria-label="Footer" className="md:col-span-3">
-          <p className="mb-5 text-[12px] font-semibold uppercase tracking-[0.18em] text-steel">Explore</p>
+          <p className="mb-5 text-[12px] font-semibold uppercase tracking-[0.18em] text-steel-light">Explore</p>
           <ul className="space-y-1">
             {navigation.map((item) => (
               <li key={item.label}>
@@ -27,7 +27,7 @@ export function SiteFooter() {
         </nav>
 
         <div className="md:col-span-4">
-          <p className="mb-5 text-[12px] font-semibold uppercase tracking-[0.18em] text-steel">Contact</p>
+          <p className="mb-5 text-[12px] font-semibold uppercase tracking-[0.18em] text-steel-light">Contact</p>
           <ul className="space-y-3 text-[15px] text-white/85">
             <li>{contact.phone.label}</li>
             <li>
@@ -40,12 +40,9 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="mx-auto flex max-w-[1320px] flex-col gap-4 border-t border-white/12 px-5 py-6 text-[13px] text-white/55 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
+      <div className="mx-auto flex max-w-[1320px] flex-col gap-4 border-t border-white/12 px-5 py-6 text-[13px] text-white/65 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
         <p>© 2026 ALVEX. All rights reserved.</p>
-        <p className="flex gap-6">
-          <span>Privacy notice — in preparation</span>
-          <span>Terms — in preparation</span>
-        </p>
+
       </div>
     </footer>
   );

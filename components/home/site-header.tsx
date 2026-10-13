@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { navigation } from "@/content/site";
-import { Logo } from "./logo";
+import { Logo } from "@/components/brand/logo";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -118,7 +118,7 @@ export function SiteHeader() {
                       className="flex min-h-14 items-center justify-between py-3 font-display text-[26px] font-semibold tracking-tight text-navy"
                     >
                       {item.label}
-                      <span aria-hidden className="text-steel">→</span>
+                      <span aria-hidden className="text-steel-deep">→</span>
                     </a>
                   </motion.li>
                 ))}
