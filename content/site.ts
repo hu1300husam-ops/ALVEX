@@ -11,9 +11,9 @@ export const brand = {
    * and give its intrinsic size. `null` keeps the neutral typeset fallback.
    */
   logo: {
-    src: null as string | null,
-    width: 0,
-    height: 0,
+    src: "/brand/alvex_wordmark_original.png" as string | null,
+    width: 1040,
+    height: 237,
     alt: "ALVEX",
   },
   legalName: "ALVEX Company",
