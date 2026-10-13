@@ -6,7 +6,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 /**
  * Cinematic hero. The canvas is a full-bleed composition of the brand's own
- * grid and one route: Yiwu to your market. It contains no photographs, because
+ * grid and one route: China to your market. It contains no photographs, because
  * no approved ALVEX imagery or licensed photography is available yet. It does
  * not imply any facility, employee or operation.
  *
@@ -128,7 +128,7 @@ export function Hero() {
           {...fade(0)}
         >
           <span className="h-px w-10 bg-steel-light" aria-hidden />
-          Yiwu, China — International trade services
+          China — International trade services
         </motion.p>
 
         <h1

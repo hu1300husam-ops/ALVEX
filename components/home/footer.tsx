@@ -35,7 +35,7 @@ export function SiteFooter() {
             </li>
             <li>WeChat · {contact.wechat.label}</li>
             <li>{contact.social.label}</li>
-            <li className="pt-2 text-white/60">Yiwu, China</li>
+            <li className="pt-2 text-white/60">Based in China</li>
           </ul>
         </div>
       </div>

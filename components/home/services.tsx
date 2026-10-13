@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import { services } from "@/content/site";
 import { Reveal } from "@/components/ui/reveal";
-import { Coordinates, Plate } from "@/components/brand/plate";
+import { Plate } from "@/components/brand/plate";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -101,7 +101,6 @@ export function Services() {
               >
                 <Plate ratio="16 / 10" tone="midnight" className="mb-8 border border-white/10">
                   <div className="absolute inset-0 flex flex-col justify-between p-7">
-                    <Coordinates className="text-steel-light" />
                     <p className="font-display text-[clamp(96px,14vw,168px)] font-bold leading-none tracking-[-0.05em] text-white/[0.92]">
                       0{active + 1}
                     </p>

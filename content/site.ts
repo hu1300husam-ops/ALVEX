@@ -19,7 +19,7 @@ export const brand = {
   legalName: "ALVEX Company",
   positioning: "Your Business Bridge to China.",
   supportingLine: "Your Team on the Ground in China.",
-  location: { city: "Yiwu", country: "China", verified: true },
+  location: { country: "China", verified: true },
   description:
     "ALVEX supports international buyers and businesses with commercial activities in China, from sourcing and supplier verification to commercial coordination and trade support.",
 } as const;

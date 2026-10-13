@@ -13,14 +13,14 @@ export const metadata: Metadata = {
     template: "%s · ALVEX",
   },
   description:
-    "ALVEX supports international buyers in China with sourcing, supplier verification, negotiation, factory coordination and trade support, from our base in Yiwu.",
+    "ALVEX supports international buyers in China with sourcing, supplier verification, negotiation, factory coordination and trade support, from our base in China.",
   applicationName: "ALVEX",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: "ALVEX",
     title: "ALVEX — Your Business Bridge to China",
-    description: "Your Team on the Ground in China. Sourcing, verification and trade support from Yiwu.",
+    description: "Your Team on the Ground in China. Sourcing, verification and trade support from China.",
     url: "/",
     locale: "en_US",
   },

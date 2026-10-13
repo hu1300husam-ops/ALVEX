@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/ui/reveal";
-import { Coordinates, Plate } from "@/components/brand/plate";
+import { Plate } from "@/components/brand/plate";
 
 /**
  * Operations as a working ledger: what the team does on the ground, and what
@@ -40,7 +40,6 @@ export function Operations() {
             </h2>
             <Plate ratio="4 / 3" tone="navy" className="mt-12 hidden lg:block">
               <div className="absolute inset-0 flex flex-col justify-between p-8">
-                <Coordinates className="text-steel-light" />
                 <p className="font-display text-[44px] font-semibold leading-[1.02] tracking-[-0.03em]">
                   Meetings. Inspections. Factory visits.
                 </p>

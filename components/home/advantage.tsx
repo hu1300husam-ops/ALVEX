@@ -2,12 +2,12 @@ import { Reveal } from "@/components/ui/reveal";
 
 /**
  * The advantage as an operating diagram, not a comparison table:
- * your team abroad, the ALVEX team in Yiwu, and the suppliers in China,
+ * your team abroad, the ALVEX team in China, and the suppliers in China,
  * with the four things that change when someone is on the ground.
  */
 const nodes: { label: string; sub: string; active?: boolean }[] = [
   { label: "Your team", sub: "Abroad" },
-  { label: "ALVEX team", sub: "Yiwu, China", active: true },
+  { label: "ALVEX team", sub: "China", active: true },
   { label: "Suppliers & factories", sub: "Across China" },
 ];
 

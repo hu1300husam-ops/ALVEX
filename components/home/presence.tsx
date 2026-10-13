@@ -4,7 +4,7 @@ import { Coordinates, Plate } from "@/components/brand/plate";
 const points = [
   {
     title: "Local market knowledge",
-    text: "Knowing which product categories are concentrated in Yiwu and which suppliers are active there, so the search starts in the right place.",
+    text: "Knowing where product categories are made in China and which suppliers are active in them, so the search starts in the right place.",
   },
   {
     title: "On-site commercial support",
@@ -32,17 +32,17 @@ export function Presence() {
           </h2>
         </Reveal>
 
-        {/* Place band: the company's one location, set as a full-width typographic plate. */}
+        {/* Location band: a full-width typographic plate. */}
         <Reveal className="mt-16 md:mt-20">
           <Plate ratio="21 / 9" tone="navy" className="min-h-[320px]" grid="fine">
             <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-10 lg:p-14">
               <Coordinates className="text-steel-light" />
               <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                 <p className="font-display text-[clamp(48px,8vw,128px)] font-bold leading-[0.9] tracking-[-0.045em]">
-                  Yiwu
+                  China
                 </p>
                 <p className="max-w-[24rem] text-[15px] leading-[1.6] text-white/80">
-                  Zhejiang Province, China. Our base for sourcing, supplier communication and on-site commercial
+                  Based in China. Our base for sourcing, supplier communication and on-site commercial
                   support.
                 </p>
               </div>
