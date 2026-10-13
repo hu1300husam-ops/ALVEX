@@ -13,7 +13,7 @@ const principles = [
   },
   {
     title: "Clear about scope",
-    text: "We say what we handle and what we do not. ALVEX coordinates; it does not own factories or warehouses.",
+    text: "We say what we handle and what we do not.",
   },
 ];
 
@@ -49,9 +49,6 @@ export function About() {
           <Reveal className="lg:col-span-5 lg:col-start-1">
             <Plate ratio="4 / 3" tone="porcelain" className="border border-line">
               <div className="absolute inset-0 flex flex-col justify-between p-8">
-                <p className="font-display text-[clamp(28px,3.4vw,40px)] font-semibold leading-[1.1] tracking-[-0.02em] text-navy">
-                  An operating company, not a directory.
-                </p>
               </div>
             </Plate>
           </Reveal>

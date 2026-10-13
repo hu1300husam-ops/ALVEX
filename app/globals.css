@@ -180,3 +180,7 @@
   .panel-in { animation: panel-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
   .route-draw { stroke-dasharray: 1; animation: route-draw 1.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
 }
+
+/* Anchor destinations clear the fixed header on every breakpoint. */
+section[id] { scroll-margin-top: 4rem; }
+@media (min-width: 1024px) { section[id] { scroll-margin-top: 5rem; } }
