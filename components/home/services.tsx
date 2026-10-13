@@ -93,7 +93,7 @@ export function Services() {
                     tabIndex={isActive ? 0 : -1}
                     className="group flex w-full items-baseline gap-6 py-6 text-left transition-colors duration-300"
                   >
-                    <span className={`font-display text-[15px] font-semibold tabular-nums transition-colors ${isActive ? "text-[#8FA8FF]" : "text-white/40"}`}>
+                    <span className={`font-display text-[15px] font-semibold tabular-nums transition-colors ${isActive ? "text-[#8FA8FF]" : "text-porcelain/65"}`}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span
