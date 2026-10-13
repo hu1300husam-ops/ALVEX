@@ -22,14 +22,17 @@ export function Logo({ tone = "dark", className = "", height = 22 }: LogoProps) 
   const { src, width, height: intrinsicHeight, alt } = brand.logo;
   if (src) {
     const w = Math.round((height * width) / intrinsicHeight);
+    // Official artwork in two colourways: navy for light surfaces, and a
+    // pure-white variant (same alpha, same geometry) for dark surfaces.
+    const file = tone === "light" ? "/brand/alvex_wordmark_white.png" : src;
     return (
       <Image
-        src={src}
+        src={file}
         alt={alt}
         width={w}
         height={height}
         priority
-        className={`block h-auto ${tone === "light" ? "invert" : ""} ${className}`}
+        className={`block h-auto ${className}`}
         style={{ height, width: "auto" }}
       />
     );

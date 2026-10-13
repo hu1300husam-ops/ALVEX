@@ -6,7 +6,7 @@ export function SiteFooter() {
     <footer id="site-footer" className="bg-midnight text-porcelain">
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-12 border-t border-white/12 px-5 py-16 sm:px-8 md:grid-cols-12 lg:px-12">
         <div className="md:col-span-5">
-          <Logo tone="light" />
+          <Logo tone="light" height={34} />
           <p className="mt-6 max-w-[24rem] font-display text-[22px] font-semibold leading-snug tracking-tight">
             {brand.positioning}
           </p>
