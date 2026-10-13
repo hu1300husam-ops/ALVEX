@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { contact } from "@/content/site";
 import { Reveal } from "@/components/ui/reveal";
+import { InquiryForm } from "@/components/home/inquiry-form";
 
 /**
- * Final call to action. "Start Your Project" opens an email draft, which works
- * today. The multi-step inquiry form is NOT built yet: it needs a confirmed
- * backend (endpoint, spam protection, privacy notice) before it can be enabled.
+ * Conversion finale. The inquiry form sits on a light panel for contrast. The
+ * WhatsApp channel is not listed because it has not been confirmed. Phone,
+ * email and WeChat are the verified channels.
  */
 export function FinalCta() {
   const [copied, setCopied] = useState(false);
@@ -22,73 +23,54 @@ export function FinalCta() {
     }
   };
 
-  const mailSubject = encodeURIComponent("Project enquiry — ALVEX");
-  const mailBody = encodeURIComponent(
-    "Hello ALVEX team,\n\nWhat I am sourcing or the support my business needs:\n\nProduct or industry:\nDestination country:\nEstimated quantity (optional):\nCompany name (optional):\n",
-  );
-
   return (
     <section id="contact" aria-labelledby="contact-title" className="bg-midnight text-porcelain">
-      <div className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32 lg:px-12">
-        <div className="grid grid-cols-1 gap-x-6 gap-y-14 lg:grid-cols-12">
-          <Reveal className="lg:col-span-8">
-            <p className="mb-6 text-[12px] font-semibold uppercase tracking-[0.2em] text-steel-light">09 — Start a conversation</p>
-            <h2 id="contact-title" className="font-display text-display-l font-bold leading-[1] tracking-[-0.035em]">
-              Let&rsquo;s build your next opportunity in China.
-            </h2>
-            <p className="mt-8 max-w-[34rem] text-[19px] leading-[1.6] text-white/80">
-              Tell us what you&rsquo;re sourcing or the support your business needs.
-            </p>
-            <a
-              href={`mailto:${contact.email.label}?subject=${mailSubject}&body=${mailBody}`}
-              className="mt-10 inline-flex min-h-14 items-center gap-3 bg-porcelain px-7 py-4 text-[16px] font-semibold text-navy transition-colors hover:bg-white"
-            >
-              Start Your Project
-              <span aria-hidden>→</span>
-            </a>
-          </Reveal>
+      <div className="mx-auto grid max-w-[1320px] gap-16 px-5 py-20 sm:px-8 md:py-32 lg:grid-cols-12 lg:gap-12 lg:px-12">
+        <Reveal className="lg:col-span-5">
+          <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-steel-light">09 — Start a conversation</p>
+          <h2
+            id="contact-title"
+            className="mt-7 font-display text-[clamp(38px,5.4vw,80px)] font-bold leading-[1.02] tracking-[-0.035em] text-balance"
+          >
+            Let’s build your next opportunity in China.
+          </h2>
+          <p className="mt-7 max-w-[26rem] text-[17px] leading-[1.65] text-porcelain/75">
+            Tell us what you’re sourcing or the support your business needs.
+          </p>
 
-          <Reveal className="lg:col-span-4 lg:self-end" delay={0.1}>
-            <p className="mb-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-steel-light">Or reach us directly</p>
-            <ul className="divide-y divide-white/12 border-y border-white/12 text-[16px]">
+          <div className="mt-14 border-t border-white/15 pt-8">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-steel-light">Or reach us directly</p>
+            <ul className="mt-6 grid gap-5 text-[17px]">
               <li>
-                <a href={contact.whatsapp.href} target="_blank" rel="noopener noreferrer" className="flex min-h-14 items-center justify-between gap-4 py-3 transition-colors hover:text-white">
-                  <span>
-                    <span className="block text-[12px] uppercase tracking-[0.14em] text-steel-light">WhatsApp</span>
-                    {contact.whatsapp.label}
-                  </span>
-                  <span aria-hidden>→</span>
+                <a href={contact.phone.href} className="font-display text-[22px] font-semibold tracking-[-0.01em] hover:text-[#8FA8FF]">
+                  {contact.phone.label}
                 </a>
+                <span className="block text-[14px] text-porcelain/60">Phone</span>
               </li>
               <li>
-                <button type="button" onClick={copyWeChat} className="flex min-h-14 w-full items-center justify-between gap-4 py-3 text-left transition-colors hover:text-white">
-                  <span>
-                    <span className="block text-[12px] uppercase tracking-[0.14em] text-steel-light">WeChat · tap to copy ID</span>
-                    {contact.wechat.label}
-                  </span>
-                  <span className="text-[13px] text-steel-light" aria-live="polite">{copied ? "Copied" : "Copy"}</span>
+                <a href={contact.email.href} className="font-display text-[22px] font-semibold tracking-[-0.01em] hover:text-[#8FA8FF]">
+                  {contact.email.label}
+                </a>
+                <span className="block text-[14px] text-porcelain/60">Email</span>
+              </li>
+              <li>
+                <button type="button" onClick={copyWeChat} className="text-left font-display text-[22px] font-semibold tracking-[-0.01em] hover:text-[#8FA8FF]">
+                  {contact.wechat.label}
                 </button>
-              </li>
-              <li>
-                <a href={contact.email.href} className="flex min-h-14 items-center justify-between gap-4 py-3 transition-colors hover:text-white">
-                  <span>
-                    <span className="block text-[12px] uppercase tracking-[0.14em] text-steel-light">Email</span>
-                    {contact.email.label}
-                  </span>
-                  <span aria-hidden>→</span>
-                </a>
-              </li>
-              <li>
-                <a href={contact.phone.href} className="flex min-h-14 items-center justify-between gap-4 py-3 transition-colors hover:text-white">
-                  <span>
-                    <span className="block text-[12px] uppercase tracking-[0.14em] text-steel-light">Phone</span>
-                    {contact.phone.label}
-                  </span>
-                  <span aria-hidden>→</span>
-                </a>
+                <span className="block text-[14px] text-porcelain/60" role="status">
+                  {copied ? "WeChat ID copied" : "WeChat · tap to copy"}
+                </span>
               </li>
             </ul>
-          </Reveal>
+          </div>
+        </Reveal>
+
+        <div className="bg-porcelain p-7 text-navy sm:p-10 lg:col-span-6 lg:col-start-7 lg:p-12">
+          <h3 className="font-display text-[24px] font-semibold tracking-[-0.015em]">Start Your Project</h3>
+          <p className="mt-3 text-[15px] text-steel-deep">Share the outline. We reply with the next practical step.</p>
+          <div className="mt-10">
+            <InquiryForm />
+          </div>
         </div>
       </div>
     </section>
