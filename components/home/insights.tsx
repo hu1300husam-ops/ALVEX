@@ -45,7 +45,7 @@ export function Insights() {
                     {topic}
                   </span>
                 </span>
-                <span aria-hidden className="text-steel-light transition-transform duration-500 group-hover:translate-x-1">→</span>
+                
               </Reveal>
             ))}
           </ol>
