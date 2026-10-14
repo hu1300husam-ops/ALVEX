@@ -1,19 +1,13 @@
-import { insightTopics } from "@/content/site";
+import Link from "next/link";
+import { articles } from "@/content/articles";
 import { Reveal } from "@/components/ui/reveal";
 
-/**
- * Insights: an editorial topic index. Articles have not been published, so
- * this section shows the subjects ALVEX covers and invites questions on them.
- * It does not show titles, dates, authors or links to articles that do not
- * exist yet.
- */
 export function Insights() {
-  const [lead, ...rest] = insightTopics;
   return (
     <section id="insights" aria-labelledby="insights-title" className="bg-navy text-porcelain">
       <div className="mx-auto max-w-[1320px] px-5 py-20 sm:px-8 md:py-32 lg:px-12">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
-          <Reveal className="lg:col-span-5">
+        <Reveal className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-5">
             <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-steel-light">07 — Insights</p>
             <h2
               id="insights-title"
@@ -21,37 +15,45 @@ export function Insights() {
             >
               Better information. Better sourcing decisions.
             </h2>
-            <p className="mt-7 max-w-[28rem] text-[17px] leading-[1.65] text-porcelain/75">
-              The decisions that come before an order: supplier evaluation, quality inspection, pricing terms and
-              lead times.
-            </p>
-            <a
-              href="#contact"
-              className="mt-10 inline-flex items-center gap-3 border-b border-porcelain pb-1 text-[15px] font-semibold transition-colors hover:text-[#8FA8FF]"
-            >
-              Ask about a topic <span aria-hidden>→</span>
-            </a>
-          </Reveal>
-
-          <div className="lg:col-span-6 lg:col-start-7">
-            <Reveal className="border-t border-white/15 pb-10 pt-7">
-              <p className="font-display text-[13px] font-semibold tabular-nums text-[#8FA8FF]">Lead topic</p>
-              <p className="mt-4 font-display text-[clamp(30px,3.6vw,48px)] font-semibold leading-[1.08] tracking-[-0.025em]">
-                {lead}
-              </p>
-            </Reveal>
-            <ol className="grid gap-x-10 sm:grid-cols-2">
-              {rest.map((topic, i) => (
-                <Reveal as="li" key={topic} delay={i * 0.03} className="flex gap-5 border-t border-white/15 py-6">
-                  <span className="font-display text-[13px] font-semibold tabular-nums text-porcelain/50">
-                    {String(i + 2).padStart(2, "0")}
-                  </span>
-                  <span className="font-display text-[19px] font-medium leading-snug tracking-[-0.01em]">{topic}</span>
-                </Reveal>
-              ))}
-            </ol>
           </div>
-        </div>
+          <p className="max-w-[30rem] self-end text-[17px] leading-[1.65] text-porcelain/75 lg:col-span-6 lg:col-start-7">
+            Practical guides to the decisions that come before an order: supplier verification, commercial terms and
+            preparing for supplier meetings.
+          </p>
+        </Reveal>
+
+        <ol className="mt-16 grid gap-px bg-white/10 md:grid-cols-3">
+          {articles.map((article, i) => (
+            <li key={article.slug} className="flex flex-col bg-navy">
+              <Link href={`/insights/${article.slug}`} className="group flex h-full flex-col">
+                <div className="relative aspect-[3/2] w-full overflow-hidden bg-midnight">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={article.image.src}
+                    alt={article.image.alt}
+                    width={1264}
+                    height={848}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-editorial group-hover:scale-[1.03]"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-7 sm:p-8">
+                  <p className="font-display text-[13px] font-semibold tabular-nums text-[#8FA8FF]">
+                    {String(i + 1).padStart(2, "0")} · {article.readMinutes} min read
+                  </p>
+                  <h3 className="mt-4 font-display text-[22px] font-semibold leading-snug tracking-[-0.015em]">
+                    {article.title}
+                  </h3>
+                  <p className="mt-4 text-[15px] leading-[1.65] text-porcelain/70">{article.excerpt}</p>
+                  <span className="mt-auto pt-8 inline-flex items-center gap-3 text-[15px] font-semibold">
+                    Read the article <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
+                  </span>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

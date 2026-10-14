@@ -38,3 +38,19 @@ Status as of this commit. Every item below is a development asset unless marked 
 2. Confirmation of the company location wording (currently "China", with no city).
 3. A white or navy logo confirmed by the owner, if the derived variant is not accepted.
 4. Written confirmation of licensed rights for any stock or generated image used in production.
+
+## Generated concept images (added with the Insights articles)
+
+| File | Used on | Notes |
+|---|---|---|
+| `public/images/about-office.jpg` | Homepage, About | Generated concept image. No people, text or identifiable place. Captioned "Illustrative image." |
+| `public/images/insight-verification.jpg` | Homepage, Operations, verification article | Generated still life of measuring tools. Captioned as illustrative. |
+| `public/images/insight-supplier-evaluation.jpg` | Homepage Insights, meeting article | Generated still life of a notebook, pen and calculator. |
+| `public/images/insight-terms.jpg` | Homepage Insights, FOB/CIF article | Generated still life. Map lines are not legible text. |
+| `public/images/canton-hall.jpg` | Canton Fair section | Generated exhibition-hall interior. Captioned "Not an ALVEX event." No logos, flags or landmarks. |
+| `public/images/service-warehouse.jpg` | Services index, Warehousing service page | Generated concept image of an empty, organised warehouse. No text or identifiable site. |
+| `public/images/service-factory.jpg` | Services index, Factory visits service page | Generated concept image of a production line. No people or identifiable factory. |
+
+- These are generated concept images, not photographs of ALVEX work. Do not describe them as company documentation.
+- The kit photos `02_Trade_and_Sourcing/factory_production.webp` and `quality_inspection.webp` are not used.
+- Before launch, confirm written licence rights for these generated images, as item 4 above requires.

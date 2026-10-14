@@ -1,6 +1,5 @@
 import { brand } from "@/content/site";
 import { Reveal } from "@/components/ui/reveal";
-import { Plate } from "@/components/brand/plate";
 
 const principles = [
   {
@@ -47,10 +46,19 @@ export function About() {
           </div>
 
           <Reveal className="lg:col-span-5 lg:col-start-1">
-            <Plate ratio="4 / 3" tone="porcelain" className="border border-line">
-              <div className="absolute inset-0 flex flex-col justify-between p-8">
-              </div>
-            </Plate>
+            <figure>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/about-office.jpg"
+                alt="A bright, calm office interior with a long table and tall glass windows"
+                width={1264}
+                height={848}
+                loading="lazy"
+                decoding="async"
+                className="aspect-[4/3] w-full object-cover"
+              />
+              <figcaption className="mt-3 text-[13px] text-steel-deep">Illustrative image.</figcaption>
+            </figure>
           </Reveal>
         </div>
       </div>

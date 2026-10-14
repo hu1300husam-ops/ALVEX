@@ -42,7 +42,7 @@ export function SiteFooter() {
 
       <div className="mx-auto flex max-w-[1320px] flex-col gap-4 border-t border-white/12 px-5 py-6 text-[13px] text-white/65 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
         <p>© 2026 ALVEX. All rights reserved.</p>
-
+        <p className="text-white/50">Based in China. ALVEX is not affiliated with the Canton Fair organisers.</p>
       </div>
     </footer>
   );

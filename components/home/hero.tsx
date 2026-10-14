@@ -87,13 +87,13 @@ export function Hero() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:col-span-5">
             <a
               href="#services"
-              className="group inline-flex min-h-13 items-center justify-center gap-3 bg-porcelain px-7 py-4 text-[15px] font-semibold text-navy transition-colors duration-300 hover:bg-white active:bg-steel-light"
+              className="group inline-flex min-h-13 items-center justify-center gap-3 bg-porcelain px-7 py-4 text-[15px] font-semibold text-navy transition-colors duration-300 hover:bg-white active:bg-[#e3e8f0]"
             >
               Explore Our Services
               <span aria-hidden className="transition-transform duration-500 group-hover:translate-x-1">→</span>
             </a>
             <a
-              href="#contact"
+              href="/contact"
               className="inline-flex min-h-13 items-center justify-center border border-porcelain/40 px-7 py-4 text-[15px] font-semibold text-porcelain transition-colors duration-300 hover:border-porcelain hover:bg-porcelain/5 active:bg-porcelain/10"
             >
               Start Your Project

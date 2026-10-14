@@ -52,7 +52,21 @@ export function CantonFair() {
           You fly home. We keep working.
         </p>
 
-        <ol className="mt-24 grid gap-px bg-white/10 md:mt-32 md:grid-cols-3">
+        <figure className="mt-20 md:mt-28">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/canton-hall.jpg"
+            alt="A long exhibition hall with glass ceilings and aisles lit in warm light"
+            width={1264}
+            height={848}
+            loading="lazy"
+            decoding="async"
+            className="aspect-[21/9] w-full object-cover"
+          />
+          <figcaption className="mt-3 text-[13px] text-porcelain/50">Illustrative image. Not an ALVEX event.</figcaption>
+        </figure>
+
+        <ol className="mt-16 grid gap-px bg-white/10 md:mt-20 md:grid-cols-3">
           {phases.map((p) => (
             <li key={p.word} className="bg-navy p-7 sm:p-9 md:min-h-[320px] md:p-10">
               <p className="font-display text-[13px] font-semibold tabular-nums text-steel-light">{p.index}</p>
@@ -70,7 +84,7 @@ export function CantonFair() {
           official representative of the fair&apos;s organisers.
         </p>
         <a
-          href="#contact"
+          href="/canton-fair"
           className="mt-8 inline-flex min-h-13 items-center gap-3 border-b border-porcelain pb-1 text-[15px] font-semibold text-porcelain transition-colors hover:text-[#8FA8FF]"
         >
           Plan your Canton Fair support

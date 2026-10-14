@@ -38,13 +38,13 @@ export const contact = {
 } as const;
 
 export const navigation = [
-  { label: "Services", href: "#services" },
-  { label: "How We Work", href: "#how-we-work" },
-  { label: "Our Operations", href: "#operations" },
-  { label: "Events & Exhibitions", href: "#canton-fair" },
-  { label: "About", href: "#about" },
-  { label: "Insights", href: "#insights" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/services" },
+  { label: "How We Work", href: "/#how-we-work" },
+  { label: "Our Operations", href: "/#operations" },
+  { label: "Events & Exhibitions", href: "/canton-fair" },
+  { label: "About", href: "/about" },
+  { label: "Insights", href: "/insights" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 export type Service = {
@@ -123,16 +123,3 @@ export const canton = {
     text: "Supplier verification, factory coordination, samples, quality checks and continued sourcing support.",
   },
 } as const;
-
-/** Topics from the brief. Articles are not yet written, so no dates or authors are shown. */
-export const insightTopics = [
-  "Supplier evaluation",
-  "China sourcing",
-  "Quality inspection",
-  "Trade fairs",
-  "Commercial negotiation",
-  "Importing fundamentals",
-  "MOQ and production lead times",
-  "FOB and CIF",
-  "Supplier verification",
-] as const;
